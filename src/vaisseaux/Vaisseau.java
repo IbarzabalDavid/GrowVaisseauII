@@ -1,5 +1,6 @@
 package vaisseaux;
 
+import centreTri.CentreTri;
 import matiere.*;
 import planetes.Planet;
 
@@ -33,7 +34,13 @@ public  class Vaisseau {
         this.capacite = capacite;
     }
 
+    public ArrayList<Materiaux> getContenu() {
+        return contenu;
+    }
 
+    public void setContenu(ArrayList<Materiaux> contenu) {
+        this.contenu = contenu;
+    }
 
     public void remplir(Planet planete){
         int i=0;
@@ -58,7 +65,12 @@ public  class Vaisseau {
 
             i++;
         }
+
     }
 
+    public void go(CentreTri centreTri){
+        centreTri.viderVaisso(this);
+        centreTri.getVaissoLine().add(this);
+    }
 
 }
