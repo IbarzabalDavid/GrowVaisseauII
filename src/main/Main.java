@@ -1,3 +1,5 @@
+package main;
+
 import centreTri.CentreTri;
 import matiere.Materiaux;
 import planetes.*;
@@ -6,14 +8,17 @@ import vaisseaux.Lourd;
 import vaisseaux.Normal;
 import vaisseaux.Vaisseau;
 
+import java.util.LinkedList;
+import java.util.Stack;
+
 /**
  * Created by ibada1731710 on 2018-04-26.
  */
 public class Main {
+    public static LinkedList<CentreTri> tabC=new LinkedList<>();
     public static void main(String[] args) {
 
-        CentreTri tabC[]=new CentreTri[10];
-        Vaisseau tabV[]=new Vaisseau[10];
+        Vaisseau tabV[]=new Vaisseau[50];
 
         for (int i=0;i<tabV.length;i++){
             int sa=(int)(Math.random()*3)+1;
@@ -27,21 +32,27 @@ public class Main {
                 tabV[i]=new Lourd();
             }
         }
-        for (int i=0;i<tabC.length;i++){
-            tabC[i]=new CentreTri();
+        for (int i=0;i<90;i++){
+            tabC.add(new CentreTri());
         }
         boolean fini=false;
         int nb=0;
         int nb1=0;
         while (!fini){
             tabV[nb].remplir(getRandomPlanet());
-            tabV[nb].go(tabC[nb1]);
-
+            tabV[nb].go(tabC.getFirst());
             nb++;
+            if (nb>=tabV.length){
+                fini=true;
+            }
+
         }
 
 
+
+
     }
+
     public static Planet getRandomPlanet(){
         Planet p1=new Pluton();
         Planet p2=new Gadolile();
@@ -64,6 +75,11 @@ public class Main {
         else  {
             return p5;
         }
+    }
+    public static CentreTri next(CentreTri ici){
+        return tabC.get(tabC.indexOf(ici)+1);
+
+
     }
 }
 

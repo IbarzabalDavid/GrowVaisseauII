@@ -17,7 +17,6 @@ public  class Vaisseau {
 
 
 
-
     public String getType() {
         return type;
     }
