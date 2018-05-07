@@ -7,7 +7,7 @@ public class Nep extends Materiaux {
     public Nep() {
         setNom("neptium");
         setMasseVol(7);
-        setPourcentageRecyclabe(39);
+        setPourcentageRecyclabe(20);
     }
 
 }

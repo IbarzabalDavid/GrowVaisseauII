@@ -7,6 +7,6 @@ public class Thul extends Materiaux {
     public Thul() {
         setNom("thulium");
         setMasseVol(6);
-        setPourcentageRecyclabe(43);
+        setPourcentageRecyclabe(20);
     }
 }

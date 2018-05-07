@@ -7,6 +7,6 @@ public class Gad extends Materiaux {
     public Gad() {
         setNom("gadolinium");
         setMasseVol(5);
-        setPourcentageRecyclabe(50);
+        setPourcentageRecyclabe(10);
     }
 }

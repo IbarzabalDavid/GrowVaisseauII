@@ -7,6 +7,6 @@ public class Plut extends Materiaux{
     public Plut() {
         setNom("plutonium");
         setMasseVol(2);
-        setPourcentageRecyclabe(40);
+        setPourcentageRecyclabe(30);
     }
 }

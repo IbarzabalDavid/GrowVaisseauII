@@ -81,56 +81,80 @@ public class CentreTri{
     }
 
     public void viderVaisso(Vaisseau vaisso){
-        int that=vaisso.getContenu().size();
-        for (int i=0;i<that;i++){
-            if (vaisso.getContenu().get(i).getNom().equals("plutonium")){
-                stackPlut.add(vaisso.getContenu().get(i));
-                if (stackPlut.size()==qMax){
-                    recycler(new Plut(), vaissoLine.poll(),stackPlut);
+        try {
+            int that=vaisso.getContenu().size();
+            for (int i=0;i<that;i++){
+                if (vaisso.getContenu().get(i).getNom().equals("plutonium")){
+                    stackPlut.add(vaisso.getContenu().get(i));
+                    if (stackPlut.size()>=qMax){
+                        recycler(new Plut(), vaissoLine.poll(),vaissoLine.peek(),stackPlut);
+                    }
+                }
+                else  if (vaisso.getContenu().get(i).getNom().equals("neptium")){
+                    stackNep.add(vaisso.getContenu().get(i));
+                    if (stackNep.size()>=qMax){
+                        recycler(new Nep(), vaissoLine.poll(),vaissoLine.peek(),stackNep);
+                    }
+                }
+                else if (vaisso.getContenu().get(i).getNom().equals("terbium")){
+                    stackTerb.add(vaisso.getContenu().get(i));
+                    if (stackTerb.size()>=qMax){
+                        recycler(new Terb(), vaissoLine.poll(),vaissoLine.peek(),stackTerb);
+                    }
+                }
+                else if (vaisso.getContenu().get(i).getNom().equals("thulium")){
+                    stackThul.add(vaisso.getContenu().get(i));
+                    if (stackThul.size()>=qMax){
+                        recycler(new Thul(), vaissoLine.poll(),vaissoLine.peek(),stackThul);
+                    }
+                }
+                else if(vaisso.getContenu().get(i).getNom().equals("gadolinium")){
+                    stackGad.add(vaisso.getContenu().get(i));
+                    if (stackGad.size()>=qMax){
+                        recycler(new Gad(), vaissoLine.poll(),vaissoLine.peek(),stackGad);
+                    }
                 }
             }
-            else  if (vaisso.getContenu().get(i).getNom().equals("neptium")){
-                stackNep.add(vaisso.getContenu().get(i));
-                if (stackNep.size()==qMax){
-                    recycler(new Nep(), vaissoLine.poll(),stackNep);
-                }
-            }
-            else if (vaisso.getContenu().get(i).getNom().equals("terbium")){
-                stackTerb.add(vaisso.getContenu().get(i));
-                if (stackTerb.size()==qMax){
-                    recycler(new Terb(), vaissoLine.poll(),stackTerb);
-                }
-            }
-            else if (vaisso.getContenu().get(i).getNom().equals("thulium")){
-                stackThul.add(vaisso.getContenu().get(i));
-                if (stackThul.size()==qMax){
-                    recycler(new Thul(), vaissoLine.poll(),stackThul);
-                }
-            }
-            else if(vaisso.getContenu().get(i).getNom().equals("gadolinium")){
-                stackGad.add(vaisso.getContenu().get(i));
-                if (stackGad.size()==qMax){
-                    recycler(new Gad(), vaissoLine.poll(),stackGad);
-                }
-            }
+            vaisso.getContenu().clear();
+        }catch (Exception oob){
+            System.out.println("Il n'y a plus de vaisseau dans le centre de tri.");
+            Main.fini=true;
         }
-        vaisso.getContenu().clear();
+
+
+
     }
 
-    public void recycler(Materiaux materiaux,Vaisseau vaisso, Stack<Materiaux> stack){
-        int matRecy= (materiaux.getPourcentageRecyclabe()*qMax/100);
-        int i=0;
-        while (i<matRecy){
-            vaisso.getContenu().add(materiaux);
-            stack.pop();
-            i++;
-            if (vaisso.getCapacite()==i){
-                vaisso.go(Main.next(this));
-                i=matRecy;
-            }
+    public void recycler(Materiaux materiaux,Vaisseau vaisso,Vaisseau vaisso2, Stack<Materiaux> stack){
+        try {
+            int matRecy= (materiaux.getPourcentageRecyclabe()*qMax/100);
+            int i=0;
+            boolean blabla1=false;
+            while (i<matRecy){
+                vaisso.getContenu().add(materiaux);
+                stack.pop();
+                i++;
+                if (vaisso.getCapacite()==i && i!=matRecy){
+                    while (i<matRecy){
+                        vaisso2.getContenu().add(materiaux);
+                        stack.pop();
+                        i++;
+                        vaissoLine.poll();
+                        vaisso2.go(Main.next(this));
 
+                    }
+                }
+
+            }
+        }catch (Exception oob){
+            System.out.println("Il n'y a plus de vaisseau dans le centre de tri.");
+            Main.fini=true;
         }
+
+
         vaisso.go(Main.next(this));
+
+
 
     }
 }

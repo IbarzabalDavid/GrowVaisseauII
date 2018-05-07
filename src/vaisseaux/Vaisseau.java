@@ -1,6 +1,7 @@
 package vaisseaux;
 
 import centreTri.CentreTri;
+import main.Main;
 import matiere.*;
 import planetes.Planet;
 
@@ -70,6 +71,10 @@ public  class Vaisseau {
     public void go(CentreTri centreTri){
         centreTri.viderVaisso(this);
         centreTri.getVaissoLine().add(this);
+        if (centreTri.getVaissoLine().size()==10){
+            centreTri.getVaissoLine().peek().remplir(Main.getRandomPlanet());
+            centreTri.viderVaisso(centreTri.getVaissoLine().poll());
+        }
     }
 
 }

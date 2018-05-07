@@ -7,6 +7,6 @@ public class Terb extends Materiaux {
     public Terb() {
         setNom("terbium");
         setMasseVol(3);
-        setPourcentageRecyclabe(20);
+        setPourcentageRecyclabe(40);
     }
 }
